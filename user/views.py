@@ -26,7 +26,7 @@ def signin(request):
                     messages.error(request,'invalid credentials')
                     return redirect('signin')
         else:
-            return render(request,'user/singin.html')
+            return render(request,'user/signin.html')
     else:
         return HttpResponse('user is already signin')
 
