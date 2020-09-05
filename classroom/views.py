@@ -89,7 +89,7 @@ def classDetails(request,clscode):
         if(ClassTest.objects.filter(classroom = classroom).exists()):
             tests  = ClassTest.objects.filter(classroom = classroom)
 
-        data = {'students':students,'chats':chats,'tests':tests}
+        data = {'students':students,'chats':chats,'tests':tests,'classroom':classroom}
         return render(request,'classroom/ownclass.html',data)
     else:
         classroom = ClassRoom.objects.get(classCode = clscode)
@@ -112,7 +112,7 @@ def classDetails(request,clscode):
                 stu_test_res = StudentTestResponse(test=test,student=request.user)
                 studentattempt.append(stu_test_res.isattempted)
 
-        data = {'students':students,'chats':chats,'tests':tests,'studentattempt':studentattempt}
+        data = {'students':students,'chats':chats,'tests':tests,'studentattempt':studentattempt,'classroom':classroom}
         return render(request,'classroom/joinclass.html',data)
 
 @login_required(login_url='signin')
