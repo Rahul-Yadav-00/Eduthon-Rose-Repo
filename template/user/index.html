@@ -200,7 +200,7 @@
 					cover.innerHTML = "";
 					for(let i=0;i<data.length;i++){
 						cover.innerHTML += `<div class="classroom-card">
-								<a href="/classroom/class-detail/${data[i].classCode}" style="text-decoration:none;">
+								<a href="/classroom/classdetail/${data[i].classCode}" style="text-decoration:none;">
 									<div class="class-content">
 										<div class="class-teacher">#${data[i].teacher.username}</div>
 										<div class="class-name">${data[i].classname}</div>
@@ -211,7 +211,20 @@
 							</div>`
 					}
 			}else if(j==2){
-				
+				var cover = document.getElementsByClassName('nav-divs')[j].getElementsByClassName('card-cover')[0];
+					cover.innerHTML = "";
+					for(let i=0;i<data.length;i++){
+						cover.innerHTML += `<div class="classroom-card">
+								<a href="/classroom/classdetail/${data[i].classCode}" style="text-decoration:none;">
+									<div class="class-content">
+										<div class="class-teacher">#${data[i].teacher.username}</div>
+										<div class="class-name">${data[i].classname}</div>
+										<div class="class-description">${data[i].classdecription}</div>
+										<div class="class-image"></div>
+									</div>
+								</a>
+							</div>`
+					}
 			}
 		}
 		document.getElementsByClassName('nav-items')[0].classList.add('clicked');
