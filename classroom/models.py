@@ -36,3 +36,16 @@ class ClassStudents(models.Model):
         unique_together = ['student','classroom']
     def __str__(self):
         return f'{self.student.username} in {self.classroom.classname}'
+
+
+class Chat(models.Model):
+    classroom = models.ForeignKey(ClassRoom,on_delete = models.CASCADE,related_name='chats')
+    body = models.TextField(null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
+
+    class Meta:
+        ordering = ['created']
+
+    def __str__ (self):
+        return f'comment by {self.user.username}'
