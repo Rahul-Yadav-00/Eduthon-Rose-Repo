@@ -131,7 +131,56 @@
 
 			<!-- own classroom -->
 			<div class="nav-divs" style="display: none;">
+				<div class="classroom-navbar">
+					<div class="classroom-nav-btn">
+						<div class="btn" id="join-btn">
+							<i class="fas fa-plus"></i>
+							<span>Create</span>
+						</div>
+						<form id="joinclsmodal" class="joincls" action="/classroom/joincls/" method="POST">
+							{% csrf_token %}
+							<input class="classcode" type="text" placeholder="classcode" name='classcode'><br>
+							<input class="submit" type="submit" value="join class">
+						</form>
+					</div>
 				
+				</div>
+				<div class="ownclassrooms">
+					<div class="card-cover">
+						<!-- reference card -->
+						<!-- <div class="classroom-card">
+							<a href="" style="text-decoration:none;">
+								<div class="class-content">
+									<div class="class-teacher">#Harshit Pawar</div>
+									<div class="class-name">MATHS</div>
+									<div class="class-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam quos blanditiis</div>
+									<div class="class-image"></div>
+								</div>
+							</a>
+						</div> -->
+					</div>
+				
+					<script>
+						var cards = document.getElementsByClassName('class-content')
+						for (let i = 1; i < cards.length; i = i + 3) {
+							cards[i].style.marginTop = '70px';
+						}
+				
+						var modal = document.getElementById("joinclsmodal")
+						var joinbtn = document.getElementById("join-btn")
+				
+						joinbtn.onclick = function () {
+							modal.style.display = 'flex';
+						}
+				
+						window.onclick = function (event) {
+							if (event.target == modal) {
+								modal.style.display = "none";
+							}
+						}
+
+					</script>
+				</div>
 			</div>
 			<div class="nav-divs" style="display: none;">portals</div>
 			<div class="nav-divs" style="display: none;">name</div>
@@ -146,20 +195,24 @@
 			let response = await fetch(url);
 			let data = await response.json();
 			console.log(data);
-			var cover = document.getElementsByClassName('nav-divs')[j].getElementsByClassName('card-cover')[0];
-				cover.innerHTML = "";
-				for(let i=0;i<data.length;i++){
-					cover.innerHTML += `<div class="classroom-card">
-							<a href="/classroom/class-detail/${data[i].classCode}" style="text-decoration:none;">
-								<div class="class-content">
-									<div class="class-teacher">#${data[i].teacher.username}</div>
-									<div class="class-name">${data[i].classname}</div>
-									<div class="class-description">${data[i].classdecription}</div>
-									<div class="class-image"></div>
-								</div>
-							</a>
-						</div>`
-				}
+			if(j==1){
+				var cover = document.getElementsByClassName('nav-divs')[j].getElementsByClassName('card-cover')[0];
+					cover.innerHTML = "";
+					for(let i=0;i<data.length;i++){
+						cover.innerHTML += `<div class="classroom-card">
+								<a href="/classroom/class-detail/${data[i].classCode}" style="text-decoration:none;">
+									<div class="class-content">
+										<div class="class-teacher">#${data[i].teacher.username}</div>
+										<div class="class-name">${data[i].classname}</div>
+										<div class="class-description">${data[i].classdecription}</div>
+										<div class="class-image"></div>
+									</div>
+								</a>
+							</div>`
+					}
+			}else if(j==2){
+				
+			}
 		}
 		document.getElementsByClassName('nav-items')[0].classList.add('clicked');
 		const arr = ['', 'http://127.0.0.1:8000/classroom/all-joinclass/', 'http://127.0.0.1:8000/classroom/all-ownclass/', '', '', ''];
