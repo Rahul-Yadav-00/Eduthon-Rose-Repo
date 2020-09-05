@@ -1,0 +1,74 @@
+.nav-bar{
+    min-width: 20vw;
+    min-height:100vh;
+    height: fit-content;
+    background-color:#ffd36b;
+}
+
+.profile-photo{
+    margin-top:50px;
+    border-radius: 50%;
+    width: 100%;
+    text-align: center;
+}
+
+.nav-btn{
+    width: 100%;
+    justify-content: right;
+    text-align: right;
+    padding:10px
+}
+
+.profile-photo img{
+    width: 150px;
+}
+
+.nav-icon{
+    padding:10px;
+    background-color:#ffe78f;
+    border-radius: 10px;
+    color:#502020;
+    cursor: pointer;
+}
+.nav-icon:hover{
+    background-color:#eccd5b;
+    color:#502020;
+
+}
+#dashboard-menu{
+    padding-top:50px;
+}
+#dashboard-menu ul a{
+    text-decoration: none;
+    color: #502020;
+}
+#dashboard-menu ul li{
+    padding: 15px;
+    list-style: none;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#dashboard-menu ul li i{
+    font-size: 20px;
+    padding-right:40px;
+    padding-left: 20px;
+    /* cursor: pointer; */
+}
+#dashboard-menu ul li:hover{
+    margin-left: 10px;
+    color: #502020;
+    transition: all .5s ease;
+    margin-right: 0px;
+    border-right: 2px solid #502020;
+    background-color: #ffe78f;
+}
+.clicked{
+    margin-left: 10px;
+    color: #502020;
+    transition: all .5s ease;
+    margin-right: 0px;
+    border-right: 2px solid #502020;
+    border-radius: 1px;
+    background-color: #ffe78f;
+}

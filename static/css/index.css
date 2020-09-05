@@ -1,0 +1,33 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    
+}
+.app{
+    display: flex;
+    width: 100vw;
+    height:100vh;
+}
+
+.horizontal-line{
+    margin-top:5px;
+    margin-bottom: 5px;
+    height: 1px;
+    width: 100%;
+    background-color:#ffe78f;
+}
+.content{
+    width:80vw;
+    height:100%;
+    background-color:#fff6da;
+}
+
+.btn:hover{
+    background-color:#eecd55;
+}
+.btn span{
+    padding-left:10px;
+    letter-spacing: 1px;
+    font-weight:500;
+}

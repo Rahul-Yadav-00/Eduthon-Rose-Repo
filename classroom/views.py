@@ -41,9 +41,9 @@ def joinClass(request):
     if(request.method == 'POST'):
         clscode = request.POST['classcode']
         if(ClassRoom.objects.filter(classCode = clscode).exists()):
-            classroom = ClassRoom.object.get(classCode = clscode)
+            classroom = ClassRoom.objects.get(classCode = clscode)
             if(classroom.teacher == request.user):
-                messages(request,'you are teacher in this class')
+                messages.error(request,'you are teacher in this class')
                 return redirect('index')
             else:
                 class_student = ClassStudents.objects.create(student=request.user,classroom = classroom)
@@ -80,11 +80,16 @@ def classDetails(request,clscode):
             class_students = ClassStudents.objects.filter(classroom = classroom)
             for c_s in class_students:
                 students.append(c_s.student)
+
         chats = Chat.objects.none()
         if(Chat.objects.filter(classroom = classroom).exists()):
             chats  = Chat.objects.filter(classroom = classroom)
+        
+        tests = ClassTest.objects.none()
+        if(ClassTest.objects.filter(classroom = classroom).exists()):
+            tests  = ClassTest.objects.filter(classroom = classroom)
 
-        data = {'students':students,'chats':chats}
+        data = {'students':students,'chats':chats,'tests':tests,'classroom':classroom}
         return render(request,'classroom/ownclass.html',data)
     else:
         classroom = ClassRoom.objects.get(classCode = clscode)
@@ -94,9 +99,77 @@ def classDetails(request,clscode):
             class_students = ClassStudents.objects.filter(classroom = classroom)
             for c_s in class_students:
                 students.append(c_s.student)
+
         chats = Chat.objects.none()
         if(Chat.objects.filter(classroom = classroom).exists()):
             chats  = Chat.objects.filter(classroom = classroom)
+        
+        tests = ClassTest.objects.none()
+        student_test_responses = StudentTestResponse.objects.none()
+        if(ClassTest.objects.filter(classroom = classroom).exists()):
+            tests  = ClassTest.objects.filter(classroom = classroom)
+            for test in tests:
+                # stu_test_res = StudentTestResponse(test=test,student=request.user)
+                student_test_responses = StudentTestResponse.objects.get(student=request.user,test=test)
+                # studentattempt.append(stu_test_res.isattempted)
 
-        data = {'students':students,'chats':chats}
+        data = {'students':students,'chats':chats,'tests':tests,'student_test_responses':student_test_responses,'classroom':classroom}
         return render(request,'classroom/joinclass.html',data)
+
+@login_required(login_url='signin')
+def createTest(request,clscode):
+    if(request.method == 'POST'):
+        classroom = ClassRoom.objects.get(classCode = clscode)
+        testname = request.POST['name']
+        topics = request.POST['testtopic']
+        test = ClassTest.objects.create(classroom = classroom,name = testname,testTopic = topics)
+
+        questions = request.POST.getlist('questions[]')
+        options_a = request.POST.getlist('options_a[]')
+        options_b = request.POST.getlist('options_b[]')
+        options_c = request.POST.getlist('options_c[]')
+        options_d = request.POST.getlist('options_d[]')
+        answers = request.POST.getlist('answers[]')
+
+        mcqs = zip(questions,options_a,options_b,options_c,options_d,answers)
+        
+        for question,option_a,option_b,option_c,option_d,answer in mcqs:
+            mcq = MCQuestion.objects.create(test=test,question = question,
+                                            option_a = option_a,option_b=option_b,
+                                            option_c=option_c,option_d=option_d,
+                                            answer = answer)
+        #creating empty response of students
+        class_students = ClassStudents.objects.none()
+        if(ClassStudents.objects.filter(classroom = classroom).exists()):
+            class_students = ClassStudents.objects.filter(classroom = classroom)
+            for class_student in class_students:
+                student_responce = StudentTestResponse.objects.create(test=test,
+                                                    student=class_student.student)
+            
+        # return HttpResponse("creaeted")
+        messages.success(request,'test created')
+        return redirect('index')
+    else:
+        return render(request,'classroom/createtest.html',{'clscode':clscode})
+
+@login_required(login_url='signin')
+def attemptTest(request,testcode):
+    if(request.method == 'POST'):
+        test = ClassTest.objects.get(testCode=testcode)
+        student_response = StudentTestResponse.objects.filter(student=request.user,test=test)
+        student_response.update(isattempted = True)
+        responses = request.POST.getlist('responses[]')
+        questions = MCQuestion.objects.filter(test=test)
+        points = 0
+        for question,response in zip(questions,responses):
+            if(question.answer == response):
+                points += 1
+        student_response.update(student_score = points)
+        # student_response.save()
+        messages.success(request,'test submited')
+        return redirect('index')
+    else:
+        test = ClassTest.objects.get(testCode=testcode)
+        questions = MCQuestion.objects.filter(test=test)
+        data = {'test':test,'questions':questions}
+        return render(request,'classroom/attempttest.html',data)

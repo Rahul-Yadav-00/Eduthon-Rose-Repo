@@ -1,0 +1,135 @@
+.classroom-navbar{
+    height:10vh;
+    width:100%;
+    padding:20px;
+    /* background-color: #ffd36b; */
+}
+
+.classroom-nav-btn{
+    width:100%;
+    height: 100%;
+    justify-content: right;
+    text-align: right;
+}
+
+.btn{
+    background-color:#ffe78f;
+    /* padding:10px; */
+    width: 150px;
+    justify-content: space-between;
+    border-radius: 20px;
+    color:#502020;
+}
+
+.joincls{
+    height: 80vh;
+    width: 60vw;
+    margin-left: 30vw;
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.joincls .classcode{
+    width: 35%;
+    min-width: 100px;
+    border-radius: 10px;
+    font-size: 15px;
+    padding : 10px;
+    outline: none;
+    border: none;
+    margin-right: 10px;
+    /* margin-bottom: 10px; */
+    background-color: rgb(226, 226, 226);
+    /* display: block; */
+}
+
+.joincls .submit{
+    width: 110px;
+    outline: none;
+    height: 40px;
+    font-size: 15px;
+    border-radius: 20px;
+    background-color:#ffe78f;
+}
+
+.joincls .submit:hover{
+    background-color: #fdd74b;
+}
+
+.classrooms{
+    height:90vh;
+    width: 80vw;
+    /* background-color: red; */
+    overflow-y: scroll;
+    padding-top: 10px;
+}
+
+.card-cover{
+    width: 90%;
+    padding: 20px;
+    height: fit-content;
+    /* background-color: yellow; */
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 20px;
+    grid-column-gap: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+ 
+.classroom-card{
+    height: 250px; 
+    background: transparent;
+    color:#502020;
+}
+
+.class-content{
+    background-color:#FFA000; 
+    cursor: pointer;
+    width:100%;
+    height:100%;
+    color:white;
+    display:flex;
+    justify-content: center;
+    /* align-items: center; */
+    flex-direction: column;
+    padding-left:30px;
+    position: relative;
+}
+.class-name {
+    font-size:45px;
+    letter-spacing:1px;
+    font-weight: 500;
+
+}
+
+.class-teacher{
+    margin-bottom:20px;
+    font-size:20px;
+    font-style: italic;
+}
+.class-description{
+    width:60%;
+    margin-top:-10px;
+}
+.class-content:hover{
+    background-color:#FE8500; 
+}
+.class-content:hover .class-image div{
+    background-color:rgb(243, 243, 243);
+}
+.class-image{
+    background:url(../images/classroomcard.jpg) no-repeat;
+    background-size: contain;
+    width:200px;
+    height:200px;
+    position: absolute;
+    top:0;
+    right:0;
+}
