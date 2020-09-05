@@ -41,9 +41,9 @@ def joinClass(request):
     if(request.method == 'POST'):
         clscode = request.POST['classcode']
         if(ClassRoom.objects.filter(classCode = clscode).exists()):
-            classroom = ClassRoom.object.get(classCode = clscode)
+            classroom = ClassRoom.objects.get(classCode = clscode)
             if(classroom.teacher == request.user):
-                messages(request,'you are teacher in this class')
+                messages.error(request,'you are teacher in this class')
                 return redirect('index')
             else:
                 class_student = ClassStudents.objects.create(student=request.user,classroom = classroom)
