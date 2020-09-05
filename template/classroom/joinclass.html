@@ -1,1 +1,174 @@
-join class
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    
+    <!-- All CSS-->    
+    <link rel="stylesheet" href="{% static 'css/join_class.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navMenu.css' %}">
+
+    <title>Dashboard</title>
+
+</head>
+
+<body>
+
+    <div class="app">
+        <div class="nav-bar">
+            <div class="nav-btn">
+                <i class="far fa-user-circle nav-icon"></i>
+                <i class="fas fa-cog nav-icon"></i>
+               <a href="{% url 'signout' %}"> <i class="fas fa-sign-out-alt nav-icon"></i></a>
+            </div>
+            <!-- profile info -->
+            <div class="profile-photo">
+                <img id="userPhoto" src="{% static 'css/images/profile_image.png' %}" alt="Avatar">
+            </div>
+            <div id="dashboard-menu">
+                <ul class="nav-item">
+                    
+                </ul>
+            </div>
+        </div>
+        <div class="content">
+            {% comment %} {% include 'users/classroom.html' %} {% endcomment %}
+            {% for message in messages %}
+            <div style="width: 100% ;z-index:1" class="alert alert-{{message.tags}} alert-dismissible fade show mb-0"
+                role="alert">
+                <strong>Message:</strong> {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% comment %} {% include 'users/selectclass.html' %} {% endcomment %}
+
+
+            
+            <div style="width:100%; height:100%">
+                <div id="classroom-chatbox">
+                    <div id="chatbox">
+                        <div class="chatbox-title">
+                            <div>Chat Box</div>
+                        </div>
+                        <div class="chats">
+
+                            {% for chat in chats %}
+                            <div class="chat-container">
+                                
+                                <div class="chat">
+                                chat.body
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                    <div id="enterchatbox">
+                        <input id="userChat" name="userChat" type="text" placeholder="">
+                        <i class="far fa-paper-plane"></i>
+                    </div>
+                </div>
+                <div class="classroom-details">
+                    <div class="classroom-title">
+                        <div>
+                            Class Room
+                        </div>
+                    </div>
+                    <div class="classroom-dashboard">
+                        <div class="classroom-col">
+                            <div class="classroom-upcoming">
+                                <div style="height: 100%; width:100%;">
+                                    <div class="classroom-heading">
+                                        <div>UPCOMING CLASSES</div>
+                                    </div>
+                                    <div class="upcoming-classes">
+                                        <div class="classes">
+                                            <div class="class-name">Maths</div>
+                                            <div class="class-timing">12:20 PM</div>
+                                        </div>
+                                        <div class="classes">
+                                            <div class="class-name">Maths</div>
+                                            <div class="class-timing">12:20 PM</div>
+                                        </div>
+                                        <div class="classes">
+                                            <div class="class-name">Maths</div>
+                                            <div class="class-timing">12:20 PM</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="classroom-students">
+                                <div style="height: 100%; width:100%;">
+                                    <div class="classroom-heading">
+                                        <div>ALL STUDENTS</div>
+                                    </div>
+                                    <div class="students">
+                                        {% for student in students %}
+                                        <div class="student">{{student.username}}</div>
+                                        {% endfor %}
+                                        <!-- <div class="student">Tanuj</div>
+                                        <div class="student">Anurag Yadav</div>
+                                        <div class="student">Vishnu Karwa</div>
+                                        <div class="student">Rajat</div>
+                                        <div class="student">Hitesh Sandhu</div>
+                                        <div class="student">Gagan Yadav</div>
+                                        <div class="student">Aman Sethi</div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="classroom-col"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+
+</body>
+<script>
+    async function getMenuData(){
+        let responseJoin= await fetch('http://127.0.0.1:8000/classroom/all-joinclass/');
+        let responseOwn= await fetch('http://127.0.0.1:8000/classroom/all-ownclass/');
+        let dataJoin = await responseJoin.json();
+        let dataOwn = await responseOwn.json();
+        var cover = document.getElementsByClassName('nav-item')[0];
+        let i=0;
+        for(i;i<dataJoin.length;i++){
+            cover.innerHTML+=`<li onclick="navItem(${i})" class="nav-items">
+            <i class="fas fa-chalkboard-teacher"></i>${dataJoin[i].classname}</li>`;
+        }
+        cover.innerHTML+=`<div class="horizontal-line"></div>`;
+        for(let j=0;j<dataOwn.length;j++){
+            cover.innerHTML+=`<li onclick="navItem(${i++})" class="nav-items">
+            <i class="fas fa-chalkboard-teacher"></i>${dataOwn[j].classname}</li>`;
+        }
+    }
+    getMenuData();
+</script>
+
+</html>

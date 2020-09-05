@@ -130,7 +130,9 @@
 			</div>
 
 			<!-- own classroom -->
-			<div class="nav-divs" style="display: none;">own classroom</div>
+			<div class="nav-divs" style="display: none;">
+				
+			</div>
 			<div class="nav-divs" style="display: none;">portals</div>
 			<div class="nav-divs" style="display: none;">name</div>
 		</div>
@@ -144,6 +146,20 @@
 			let response = await fetch(url);
 			let data = await response.json();
 			console.log(data);
+			var cover = document.getElementsByClassName('nav-divs')[j].getElementsByClassName('card-cover')[0];
+				cover.innerHTML = "";
+				for(let i=0;i<data.length;i++){
+					cover.innerHTML += `<div class="classroom-card">
+							<a href="/classroom/class-detail/${data[i].classCode}" style="text-decoration:none;">
+								<div class="class-content">
+									<div class="class-teacher">#${data[i].teacher.username}</div>
+									<div class="class-name">${data[i].classname}</div>
+									<div class="class-description">${data[i].classdecription}</div>
+									<div class="class-image"></div>
+								</div>
+							</a>
+						</div>`
+				}
 		}
 		document.getElementsByClassName('nav-items')[0].classList.add('clicked');
 		const arr = ['', 'http://127.0.0.1:8000/classroom/all-joinclass/', 'http://127.0.0.1:8000/classroom/all-ownclass/', '', '', ''];
