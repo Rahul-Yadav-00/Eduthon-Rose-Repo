@@ -1,0 +1,121 @@
+<!-- #ffd36b dark color -->
+<!-- #ffe78f light color -->
+<!-- #502020 text color -->
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+		integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+	<!-- Dashboard CSS-->
+	<link rel="stylesheet" href="{% static 'css/index.css' %}">
+	<link rel="stylesheet" href="{% static 'css/nav_menu.css' %}">
+
+	<title>Dashboard</title>
+
+</head>
+
+<body>
+
+	<div class="app">
+
+		<!-- dashboard menu -->
+		<div class="nav-bar">
+			<div class="nav-btn">
+				<i class="far fa-user-circle nav-icon"></i>
+				<i class="fas fa-cog nav-icon"></i>
+				<a href="{% url 'signout' %}"> <i class="fas fa-sign-out-alt nav-icon"></i></a>
+			</div>
+			<!--profile info-->
+			<div class="profile-photo">
+				<img id="userPhoto" src="{% static 'images/profile_image.png' %}" alt="Avatar">
+			</div>
+			<div id="dashboard-menu">
+				<ul>
+					<li onclick="navItem(0)" class="nav-items"><i class="fas fa-th-large"></i>Dashboard</li>
+					<li onclick="navItem(1)" class="nav-items"><i class="fas fa-users"></i>ClassRoom's</li>
+					<li onclick="navItem(2)" class="nav-items"><i class="fas fa-chalkboard-teacher"></i>Own ClassRoom's
+					</li>
+					<div class="horizontal-line"></div>
+					<li onclick="navItem(3)" class="nav-items"><i class="fas fa-clipboard-check"></i>Portals</li>
+					<div class="horizontal-line"></div>
+					<li onclick="navItem(4)" class="nav-items"><i class="fas fa-graduation-cap"></i>College Name</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- content of the page -->
+		<div class="content">
+			<!-- message for login in -->
+			{% for message in messages %}
+			<div style="width: 100% ;z-index:1" class="alert alert-{{message.tags}} alert-dismissible fade show mb-0"
+				role="alert">
+				<strong>Message:</strong> {{message}}
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			{% endfor %}
+
+
+			<!-- nav-menu-divs -->
+
+			<!-- dashboard -->
+			<div class="nav-divs">dashboard</div>
+
+			<!-- classroom -->
+			<div class="nav-divs" style="display: none;">classroom</div>
+
+			<!-- own classroom -->
+			<div class="nav-divs" style="display: none;">own classroom</div>
+			<div class="nav-divs" style="display: none;">portals</div>
+			<div class="nav-divs" style="display: none;">name</div>
+		</div>
+	</div>
+
+
+	<!-- <a href="/classroom/class-detail/data[i].classCode"></a>       -->
+</body>
+	<script>
+		async function getData(url, j) {
+			let response = await fetch(url);
+			let data = await response.json();
+			console.log(data);
+		}
+		document.getElementsByClassName('nav-items')[0].classList.add('clicked');
+		const arr = ['', 'http://127.0.0.1:8000/classroom/all-joinclass/', 'http://127.0.0.1:8000/classroom/all-ownclass/', '', '', ''];
+		function navItem(index) {
+			for (var i = 0; i < 5; i++) {
+				if (i == index) {
+					document.getElementsByClassName('nav-items')[i].classList.add('clicked');
+					document.getElementsByClassName('nav-divs')[i].style.display = 'block';
+					getData(arr[index], i);
+				} else {
+					document.getElementsByClassName('nav-items')[i].classList.remove('clicked');
+					document.getElementsByClassName('nav-divs')[i].style.display = 'none';
+				}
+			}
+		}
+	</script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+		integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+		integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+		crossorigin="anonymous"></script>
+
+</html>
