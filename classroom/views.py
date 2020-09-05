@@ -105,14 +105,15 @@ def classDetails(request,clscode):
             chats  = Chat.objects.filter(classroom = classroom)
         
         tests = ClassTest.objects.none()
-        studentattempt = list()
+        student_test_responses = StudentTestResponse.objects.none()
         if(ClassTest.objects.filter(classroom = classroom).exists()):
             tests  = ClassTest.objects.filter(classroom = classroom)
             for test in tests:
-                stu_test_res = StudentTestResponse(test=test,student=request.user)
-                studentattempt.append(stu_test_res.isattempted)
+                # stu_test_res = StudentTestResponse(test=test,student=request.user)
+                student_test_responses = StudentTestResponse.objects.get(student=request.user,test=test)
+                # studentattempt.append(stu_test_res.isattempted)
 
-        data = {'students':students,'chats':chats,'tests':tests,'studentattempt':studentattempt,'classroom':classroom}
+        data = {'students':students,'chats':chats,'tests':tests,'student_test_responses':student_test_responses,'classroom':classroom}
         return render(request,'classroom/joinclass.html',data)
 
 @login_required(login_url='signin')
