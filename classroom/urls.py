@@ -6,6 +6,7 @@ urlpatterns = [
     path('createcls/',views.createClass,name='createcls'),
     path('classdetail/<slug:clscode>/',views.classDetails,name='classdetail'),
     path('createtest/<slug:clscode>/',views.createTest,name='createtest'),
+    path('attempttest/<slug:testcode>/',views.attemptTest,name='attempttest'),
 
     #rest api
     path('all-joinclass/',views.allJoinclass,name='all-joinclass'),
