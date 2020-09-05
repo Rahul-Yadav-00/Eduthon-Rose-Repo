@@ -1,5 +1,5 @@
 env/
-# db.sqlite3
+db.sqlite3
 MonitoringSystem/__pycache__/
 classroom/__pycache__/
 classroom/migrations/__pycache__/

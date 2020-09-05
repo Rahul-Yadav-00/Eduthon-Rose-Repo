@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" href="{% static 'css/nav_menu.css' %}">
 
-    <title>Dashboard</title>
+    <title>ClassRoom</title>
 
 </head>
 
@@ -38,8 +38,11 @@
                 <img id="userPhoto" src="{% static 'images/profile_image.png' %}" alt="Avatar">
             </div>
             <div id="dashboard-menu">
+                <h2>Classrooms</h2>
                 <ul class="nav-item">
-                    
+                </ul>
+                <h2>OwnClassrooms</h2>
+                <ul class="nav-item">
                 </ul>
             </div>
         </div>
@@ -157,18 +160,29 @@
         let dataJoin = await responseJoin.json();
         let dataOwn = await responseOwn.json();
         var cover = document.getElementsByClassName('nav-item')[0];
+        var cover2 = document.getElementsByClassName('nav-item')[1];
         let i=0;
         for(i;i<dataJoin.length;i++){
-            cover.innerHTML+=`<li onclick="navItem(${i})" class="nav-items">
-            <i class="fas fa-chalkboard-teacher"></i>${dataJoin[i].classname}</li>`;
+            cover.innerHTML+=`<a href="/classroom/classdetail/${dataJoin[i].classCode}" style="text-decoration:none;"><li onclick="navItem(${i})" class="nav-items">
+           <i class="fas fa-angle-double-right"></i>${dataJoin[i].classname}</li></a>`;
         }
         cover.innerHTML+=`<div class="horizontal-line"></div>`;
         for(let j=0;j<dataOwn.length;j++){
-            cover.innerHTML+=`<li onclick="navItem(${i++})" class="nav-items">
-            <i class="fas fa-chalkboard-teacher"></i>${dataOwn[j].classname}</li>`;
+            cover2.innerHTML+=`<a href="/classroom/classdetail/${dataOwn[j].classCode}" style="text-decoration:none;"><li onclick="navItem(${i++})" class="nav-items">
+           <i class="fas fa-angle-double-right"></i>${dataOwn[j].classname}</li></a>`;
         }
     }
     getMenuData();
+    function navItem(index){
+        let cover = document.getElementsByClassName('nav-items');
+        for (var i = 0; i < cover.length; i++) {
+				if (i == index) {
+					document.getElementsByClassName('nav-items')[i].classList.add('clicked');
+				} else {
+					document.getElementsByClassName('nav-items')[i].classList.remove('clicked');
+				}
+			}
+    }
 </script>
 
 </html>
