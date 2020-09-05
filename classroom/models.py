@@ -49,3 +49,57 @@ class Chat(models.Model):
 
     def __str__ (self):
         return f'comment by {self.user.username}'
+
+
+
+class ClassTest(models.Model):
+    classroom = models.ForeignKey(ClassRoom,on_delete = models.CASCADE,related_name='classTest')
+    name = models.CharField(max_length = 50)
+    testTopic = models.CharField(max_length = 200)
+    created = models.DateTimeField(auto_now_add = True)
+    testCode =  models.SlugField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['created']
+
+    def save(self,*args,**kwargs):
+        if(self.testCode == None):
+            testcode = slugify(self.testTopic)
+            has_testcode = ClassTest.objects.filter(testCode = testcode).exists()
+            count = 1
+            while has_testcode:
+                count += 1
+                testcode = slugify(self.testTopic) + '-' + str(count)
+                has_testcode = ClassTest.objects.filter(testCode = testcode).exists()
+            
+            self.testCode = testcode
+        super().save(*args,**kwargs)
+
+    def __str__(self):
+        return f'{self.name} in {self.classroom.classname}'
+
+class MCQuestion(models.Model):
+    test = models.ForeignKey(ClassTest,on_delete = models.CASCADE,related_name='testquestion')
+    question = models.TextField()
+    option_a = models.TextField()
+    option_b = models.TextField()
+    option_c = models.TextField()
+    option_d = models.TextField()
+    choice = (('a',option_a),('b',option_b),('c',option_c),('d',option_d))
+    answer = models.CharField(max_length=1,choices = choice )
+    questionCode =  models.SlugField(null=True, blank=True)
+
+    def save(self,*args,**kwargs):
+        if(self.questionCode == None):
+            questioncode = slugify(self.question)
+            has_code = MCQuestion.objects.filter(questionCode = questioncode).exists()
+            count = 1
+            while(has_code):
+                count += 1
+                questioncode = slugify(self.question) + '-' + str(count)
+                has_code = MCQuestion.objects.filter(questionCode = questioncode).exists()
+            
+            self.questionCode = questioncode
+            super().save(*args,**kwargs)
+    def __str__(self):
+        return self.questionCode

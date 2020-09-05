@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Test</title>
+</head>
+
+<body>
+    <form action="/classroom/createtest/{{clscode}}/" method="POST">
+        {% csrf_token %}
+        <input type="text" placeholder="testname" name="name">
+        <input type="text" placeholder="topics" name="testtopic">
+        <div  id="questioncover">
+            <div>
+                <Textarea name="questions[]" placeholder="question"></Textarea>
+                <Textarea name="options_a[]" placeholder="options_a"></Textarea>
+                <Textarea name="options_b[]" placeholder="options_b"></Textarea>
+                <Textarea name="options_c[]" placeholder="options_c"></Textarea>
+                <Textarea name="options_d[]" placeholder="options_d"></Textarea>
+            </div>
+
+            <br>
+            <select name="answers[]" id="">
+                <option value="">select answer</option>
+                <option value="a">a</option>
+                <option value="b">b</option>
+                <option value="c">c</option>
+                <option value="d">d</option>
+            </select>
+            <br>
+        </div>
+        <div id="addquestion">add_question</div> <br><br>
+        <input type="submit" value="createtest">
+    </form>
+
+
+    <script>
+        document.getElementById("addquestion").onclick = function () {
+            var questioncover = document.getElementById("questioncover")
+            var newquestionblock =
+             `<div>
+                <Textarea name="questions[]" placeholder="question"></Textarea>
+                <Textarea name="options_a[]" placeholder="options_a"></Textarea>
+                <Textarea name="options_b[]" placeholder="options_b"></Textarea>
+                <Textarea name="options_c[]" placeholder="options_c"></Textarea>
+                <Textarea name="options_d[]" placeholder="options_d"></Textarea>
+            </div>
+
+            <br>
+            <select name="answers[]" id="">
+                <option value="">select answer</option>
+                <option value="a">a</option>
+                <option value="b">b</option>
+                <option value="c">c</option>
+                <option value="d">d</option>
+            </select>
+            <br>`;
+
+            questioncover.insertAdjacentHTML('beforeend', newquestionblock);
+        }
+    </script>
+</body>
+
+</html>

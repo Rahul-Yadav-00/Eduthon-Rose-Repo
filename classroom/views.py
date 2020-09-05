@@ -100,3 +100,30 @@ def classDetails(request,clscode):
 
         data = {'students':students,'chats':chats}
         return render(request,'classroom/joinclass.html',data)
+
+@login_required(login_url='signin')
+def createTest(request,clscode):
+    if(request.method == 'POST'):
+        classroom = ClassRoom.objects.get(classCode = clscode)
+        testname = request.POST['name']
+        topics = request.POST['testtopic']
+        test = ClassTest.objects.create(classroom = classroom,name = testname,testTopic = topics)
+
+        questions = request.POST.getlist('questions[]')
+        options_a = request.POST.getlist('options_a[]')
+        options_b = request.POST.getlist('options_b[]')
+        options_c = request.POST.getlist('options_c[]')
+        options_d = request.POST.getlist('options_d[]')
+        answers = request.POST.getlist('answers[]')
+
+        mcqs = zip(questions,options_a,options_b,options_c,options_d,answers)
+        
+        for question,option_a,option_b,option_c,option_d,answer in mcqs:
+            mcq = MCQuestion.objects.create(test=test,question = question,
+                                            option_a = option_a,option_b=option_b,
+                                            option_c=option_c,option_d=option_d,
+                                            answer = answer)
+
+        return HttpResponse("creaesd")
+    else:
+        return render(request,'classroom/createtest.html',{'clscode':clscode})
