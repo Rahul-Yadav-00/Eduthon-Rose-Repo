@@ -1,1 +1,85 @@
-signin
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <title>Sign In</title>
+    </head>
+    <body>
+        <div class="app">
+        {% for message in messages %}
+            <div style="z-index:1" class="alert alert-{{message.tags}} alert-dismissible fade show mb-0" role="alert">
+                <strong>Message:</strong> {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+            
+        <div class="image"></div>
+        <div class="form">
+            <div style="background-color:#eeeeeeef; width:100%; height:100%; border-radius:10px; justify-content: center; align-items: center;">
+                <div id="signIn" style="height:100%">
+                    <div id="signuplink">Not User?</div>
+                    <form action="/signin/" method="POST" class="inputs">
+                    {% csrf_token %}
+                        <label for="email" style="font-weight: bold;">Username</label>
+                        <input id="username" name="userName" type="text" placeholder="Username">
+                        <label for="password" style="font-weight: bold;"> Password</label>
+                        <input id="login-password" name="userPassword" type="password" placeholder="Password"><br>
+                        <input id="signin" type="submit" value="Sign In">
+                    </form>
+                </div>
+                <div id="signUp"style="height:100%; display: none">
+                    <div id="signinlink">Already User?</div>
+                    <form action="/signup/" method="POST" class="inputs">
+                    {% csrf_token %}
+
+                        <!-- Name -->
+                        <label for="username" style="font-weight: bold;">Username</label>
+                        <input id="username" name="userName" type="text" placeholder="Name">
+
+                        <!-- Email -->
+                        <label for="userEmail" style="font-weight: bold;">Email</label>
+                        <input id="userEmail" name="userEmail" type="text" placeholder="Email">
+
+                        <!-- Password -->
+                        <label for="userPassword" style="font-weight: bold;">Password</label>
+                        <input id="userPassword" name="userPassword" type="text" placeholder="Password">
+
+                        <!-- Confirm Password -->
+                        <label for="userConfirmPassword" style="font-weight: bold;"> Confirm Password</label>
+                        <input id="userConfirmPassword" name="userConfirmPassword" type="userConfirmPassword" placeholder="Confirm Password"><br>
+                        <input id="signup" type="submit" value="Sign Up">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script>
+        var signIn=document.getElementById('signIn');
+        var signUp=document.getElementById('signUp');
+        var signInLink=document.getElementById('signinlink');
+        var signUpLink=document.getElementById('signuplink');
+        signInLink.onclick = function(){
+            signUp.style.display='none';
+            signIn.style.display='block';
+        }
+        signUpLink.onclick = function(){
+            signIn.style.display='none';
+            signUp.style.display='block';
+        }
+    </script>
+</html>
