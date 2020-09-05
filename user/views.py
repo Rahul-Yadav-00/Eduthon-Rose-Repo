@@ -15,35 +15,39 @@ def index(request):
 def signin(request):
     if(request.user.is_authenticated == False):
         if(request.method == 'POST'):
-            username = request.POST['username']
+            username = request.POST['userName']
             if(User.objects.filter(username = username).exists()):
                 password = request.POST['userPassword']
                 user = authenticate(username=username,password=password)
                 if user is not None:
                     login(request,user)
                     messages.success(request,'login successful')
+                    return redirect('index')
                 else:
                     messages.error(request,'invalid credentials')
                     return redirect('signin')
+            else:
+                messages.error(request,'invalid username')
+                return redirect('signin')
         else:
             return render(request,'user/signin.html')
     else:
-        return HttpResponse('user is already signin')
+        return redirect('index')
 
 def signup(request):
     if(request.method == 'POST'):
-        username = request.POST['username']
+        username = request.POST['userName']
         if(User.objects.filter(username=username).exists()):
             messages.error(request,'this username is already taken')
             return redirect('signup')
         else:
-            email = request.POST['email']
+            email = request.POST['userEmail']
             if(User.objects.filter(email=email).exists()):
                 messages.error(request,'this email is already registered')
                 return redirect('signin')
             else:
-                password = request.POST['userpassword']
-                cpassword = request.POST['userconfirmpassword']
+                password = request.POST['userPassword']
+                cpassword = request.POST['userConfirmPassword']
                 if(password != cpassword):
                     messages.error(request,'your passwords are not matching')
                     return redirect('signup')
