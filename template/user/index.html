@@ -133,14 +133,16 @@
 			<div class="nav-divs" style="display: none;">
 				<div class="classroom-navbar">
 					<div class="classroom-nav-btn">
-						<div class="btn" id="join-btn">
+						<div class="btn" id="create-btn">
 							<i class="fas fa-plus"></i>
 							<span>Create</span>
 						</div>
-						<form id="joinclsmodal" class="joincls" action="/classroom/joincls/" method="POST">
+						<form id="createclsmodal" class="joincls" action="/classroom/createcls/" method="POST">
 							{% csrf_token %}
-							<input class="classcode" type="text" placeholder="classcode" name='classcode'><br>
-							<input class="submit" type="submit" value="join class">
+							<input class="classcode" type="text" placeholder="classname" name='classname'><br>
+							<input class="classcode" type="text" placeholder="classdescription" name='classdescription'><br>
+							<input class="classcode" type="text" placeholder="classsubject" name='classsubject'><br>
+							<input class="submit" type="submit" value="create class">
 						</form>
 					</div>
 				
@@ -166,11 +168,12 @@
 							cards[i].style.marginTop = '70px';
 						}
 				
-						var modal = document.getElementById("joinclsmodal")
-						var joinbtn = document.getElementById("join-btn")
+						var createmodal = document.getElementById("createclsmodal")
+						var createbtn = document.getElementById("create-btn")
 				
-						joinbtn.onclick = function () {
-							modal.style.display = 'flex';
+						createbtn.onclick = function () {
+							createmodal.style.display = 'flex';
+							createmodal.style.flexDirection='column'
 						}
 				
 						window.onclick = function (event) {
