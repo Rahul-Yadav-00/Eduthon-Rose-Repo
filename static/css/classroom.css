@@ -125,7 +125,7 @@
     background-color:rgb(243, 243, 243);
 }
 .class-image{
-    background:url(../css/images/classroomcard.jpg) no-repeat;
+    background:url(../images/classroomcard.jpg) no-repeat;
     background-size: contain;
     width:200px;
     height:200px;

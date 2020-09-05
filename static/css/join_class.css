@@ -1,0 +1,198 @@
+#classroom-chatbox{
+    position: absolute;
+    top:0;
+    right:0;
+    width:400px;
+    height:100%;
+    background-color:#ffd87c;
+}
+#chatbox{
+    height:92vh;
+    /* background-color:teal; */
+    width:100%;
+}
+#enterchatbox{
+    height:8vh;
+    width:100%;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#userChat{
+    /* padding:10px; */
+    height: 70%;
+    width:80%;
+    border-radius: 20px;
+    font-size: 15px;
+    padding : 10px;
+    border: none;
+    background-color:#fdecad;
+}
+#enterchatbox i{
+    font-size: 20px;
+    cursor: pointer;
+    color:#c58c06;
+}
+*:focus{
+    outline: none;
+}
+.classroom-details{
+    height: 100%;
+    width: calc(100% - 400px);
+    color:#502020;
+}
+.classroom-title{
+    width:100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding:15px 50px 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.classroom-title div{
+    padding-left:200px;
+    padding-bottom:5px;
+    border-bottom:4px solid #fdecad;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    transition: .05s all ease-in-out;
+}
+.classroom-title div:hover{
+    padding-left:82%;
+    border-bottom:4px solid #f3d462;
+    transition: .2s all ease-in-out;
+}
+.classroom-dashboard{
+    height: calc(100% - 70px);
+    width:100%;
+    display:flex;
+}
+.classroom-col{
+    width:50%;
+    height:100%;
+}
+.classroom-upcoming{
+    width:100%;
+    height:50%;
+    padding:20px 10px 10px 50px;
+    /* background-color:teal; */
+}
+.classroom-students{
+    width:100%;
+    height:50%;
+    padding:20px 10px 10px 50px;
+}
+.classroom-heading{
+    width:100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding:10px 20px 10px 10px;
+    font-size: 15px;
+    /* cursor: pointer; */
+    letter-spacing: 1px;
+    font-weight: 500;
+    /* background-color:teal; */
+}
+.classroom-heading div{
+    padding-right:50px;
+    padding-bottom:5px;
+    border-bottom:4px solid #fdecad;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    transition: .05s all ease-in-out;
+}
+.classroom-heading div:hover{
+    border-bottom:4px solid #f3d462;
+}
+.students{
+    width:100%;
+    height:80%;
+    /* background-color:teal; */
+    padding-left:10px;
+    overflow:scroll;
+    overflow-x: hidden;
+}
+.student{
+    width: fit-content;
+    padding:5px 10px 5px 10px;
+    background-color:#ffd87c;
+    height:fit-content;
+    border-radius: 15px;
+    margin-bottom: 5px;
+    border-top-left-radius: 0px;
+}
+.upcoming-classes{
+    height:80%;
+    width: 100%;
+    padding-left:10px;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    /* background-color:teal; */
+}
+.classes{
+    padding:10px 15px 10px 15px;
+    justify-content:space-between;
+    background-color:#ffd87c;
+    border-radius: 15px;
+    margin-bottom:5px;
+}
+.class-name{
+    /* border-bottom:2px solid white; */
+    padding-bottom:5px;
+}
+.class-timing{
+    padding-top:5px;
+}
+.chatbox-title{
+    width:100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding:15px 30px 10px 30px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.chatbox-title div{
+    padding-right:20px;
+    padding-bottom:5px;
+    border-bottom:4px solid #fdecad;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+#classroom-chatbox:hover .chatbox-title div{
+    padding-right: 0px;
+    padding-left:75%;
+    transition: 0.3s all ease-in-out;
+}
+.chats{
+    width:100%;
+    height:90%;
+    /* background-color:teal; */
+    padding-left:30px;
+    padding-right:30px;
+    overflow:scroll;
+    overflow-x: hidden;
+}
+.chat-container{
+    width:100%;
+    height: fit-content;
+    display:flex;
+}
+.chat{
+    width: fit-content;
+    padding:5px 10px 5px 10px;
+    background-color:#fdecad;
+    height:fit-content;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    border-top-left-radius: 0px;
+}
+.user-container{
+    justify-content: flex-end;
+}
+.user-chat{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 0px;
+}
