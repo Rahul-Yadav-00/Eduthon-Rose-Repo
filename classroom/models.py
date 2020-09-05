@@ -85,7 +85,7 @@ class MCQuestion(models.Model):
     option_b = models.TextField()
     option_c = models.TextField()
     option_d = models.TextField()
-    choice = (('a',option_a),('b',option_b),('c',option_c),('d',option_d))
+    choice = (('a','a'),('b','b'),('c','c'),('d','d'))
     answer = models.CharField(max_length=1,choices = choice )
     questionCode =  models.SlugField(null=True, blank=True)
 
@@ -103,3 +103,24 @@ class MCQuestion(models.Model):
             super().save(*args,**kwargs)
     def __str__(self):
         return self.questionCode
+
+class StudentTestResponse(models.Model):
+    student = models.ForeignKey(User,on_delete=models.CASCADE,related_name="student_Response")
+    test = models.ForeignKey(ClassTest,on_delete=models.CASCADE,related_name="test_no")
+    isattempted = models.BooleanField(default=False)
+    student_score = models.IntegerField(default=0)
+    class Meta:
+        unique_together = ['student','test']
+    def __str__(self):
+        return f'answer of {self.test.name} by {self.student.username}'
+
+class MCQStudentResponse(models.Model):
+    student_response = models.ForeignKey(StudentTestResponse,on_delete=models.CASCADE,related_name='test_student_status')
+    question = models.ForeignKey(MCQuestion,on_delete=models.CASCADE,related_name="questions_for_response")
+    option_selected = models.CharField(max_length=1,default='u')
+
+    class Meta:
+        unique_together = ['student_response','question']
+
+    def __str__(self):
+        return self.question.question + " and " + self.option_selected
