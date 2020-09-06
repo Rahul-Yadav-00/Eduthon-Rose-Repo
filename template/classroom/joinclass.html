@@ -69,15 +69,47 @@
                         </div>
                         <div class="chats">
 
-                            {% for chat in chats %}
+                            {% comment %} {% for chat in chats %}
                             <div class="chat-container">
                                 
                                 <div class="chat">
                                 chat.body
                                 </div>
                             </div>
-                            {% endfor %}
-
+                            {% endfor %} {% endcomment %}
+                            <div class="chat-container user-container" style="justify-content: flex-end;">
+                                <div class="chat user-chat">Hi<span style="font-size:10px; padding-left:10px;">harshit</span></div>
+                            </div>
+                            <div class="chat-container">
+                                <div class="chat">Hello<span style="font-size:10px; padding-left:10px;">vishnu</span></div>
+                            </div>
+                            <div class="chat-container user-container">
+                                <div class="chat user-chat">Did you completed the assignment?<span style="font-size:10px; padding-left:10px;">rahul</span></div>
+                            </div>
+                            <div class="chat-container">
+                                <div class="chat">YEs<span style="font-size:10px; padding-left:10px;">tanuj</span></div>
+                            </div>
+                            <div class="chat-container">
+                                <div class="chat">No<span style="font-size:10px; padding-left:10px;">vishnu</span></div>
+                            </div>
+                            <div class="chat-container">
+                                <div class="chat">na<span style="font-size:10px; padding-left:10px;">harshit</span></div>
+                            </div>
+                            <div class="chat-container">
+                                <div class="chat">Yes, i uploaded on the drive<span style="font-size:10px; padding-left:10px;">vishnu</span></div>
+                            </div>
+                            <div class="chat-container user-container">
+                                <div class="chat user-chat">can someone send me the assignment :)<span style="font-size:10px; padding-left:10px;">rahul</span></div>
+                            </div>
+                            <div class="chat-container">
+                                <div class="chat">Yeah sure<span style="font-size:10px; padding-left:10px;">tanuj</span></div>
+                            </div>
+                            <div class="chat-container">
+                                <div class="chat">It's very simple assignment?<span style="font-size:10px; padding-left:10px;">anurag</span></div>
+                            </div>
+                            <div class="chat-container user-container" style="justify-content: flex-end;">
+                                <div class="chat user-chat">no man no for me :(<span style="font-size:10px; padding-left:10px;">rahul</span></div>
+                            </div>
                         </div>
                     </div>
                     <div id="enterchatbox">
@@ -135,7 +167,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="classroom-col"></div>
+                        <div class="classroom-col"  style="padding-right:50px; padding-top:60px;">
+                        <div class="all test">
+                            <div class="test">
+                                <div  class="test-nav">
+                                    <i class="fas fa-circle-notch"></i>
+                                    <label for="name">Assignment 1</label>  
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -171,6 +211,7 @@
             cover2.innerHTML+=`<a href="/classroom/classdetail/${dataOwn[j].classCode}" style="text-decoration:none;"><li onclick="navItem(${i++})" class="nav-items">
            <i class="fas fa-angle-double-right"></i>${dataOwn[j].classname}</li></a>`;
         }
+        document.getElementsByClassName('nav-items')[0].classList.add('clicked');
     }
     getMenuData();
     function navItem(index){

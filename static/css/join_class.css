@@ -196,3 +196,26 @@
     border-top-left-radius: 15px;
     border-top-right-radius: 0px;
 }
+#dashboard-menu h2{
+    font-size:20px;
+    padding:10px 30px;
+    background-color:#fdecad;
+}
+.all-test{
+    height:100%;
+    overflow-y: scroll;
+    width:100%;
+}
+.test{
+    height:150px;
+    width:100%;
+    background-color:#fdecad;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.test-nav{
+    padding:15px;
+}
+.test-nav i{
+    padding-right:10px;
+}
