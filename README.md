@@ -1,7 +1,7 @@
 # Eduthon-Rose-Repo
 ## Idea
   Theme :- Tools for making learning visible  
-  Concept :- Helping students to combine their new education life with the digital world
+  Concept :- Helping students to combine their new education life with the digital world  
   Project Video :- (it is a compressed file)https://drive.google.com/drive/folders/1OUWyOXEt6gtb8MR79khN82bI9o_btcS7?usp=sharing
 ## Installation Setup:-  
 1. Install Python
