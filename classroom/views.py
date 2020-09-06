@@ -135,9 +135,10 @@ def createTest(request,clscode):
         
         for question,option_a,option_b,option_c,option_d,answer in mcqs:
             mcq = MCQuestion.objects.create(test=test,question = question,
-                                            option_a = option_a,option_b=option_b,
+                                            option_a=option_a,option_b=option_b,
                                             option_c=option_c,option_d=option_d,
                                             answer = answer)
+            print(test,option_a,option_b,option_c,option_d,answer)
         #creating empty response of students
         class_students = ClassStudents.objects.none()
         if(ClassStudents.objects.filter(classroom = classroom).exists()):
