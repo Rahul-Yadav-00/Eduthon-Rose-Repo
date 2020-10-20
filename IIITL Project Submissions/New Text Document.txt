@@ -1,0 +1,5 @@
+1. Monitoring System
+2.
+3. Monitor the Student progress in the subject.
+4. Making Chat box, Creating test qustions.
+5. Python, Django, HTML/CSS , Javascript
